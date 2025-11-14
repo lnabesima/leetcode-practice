@@ -1,4 +1,4 @@
-function hasDuplicates(numArr: number[]) {
+export function hasDuplicates(numArr: number[]): boolean {
   const numSet = new Set();
 
   for (const num of numArr) {

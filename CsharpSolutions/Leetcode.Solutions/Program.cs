@@ -1,8 +1,8 @@
 ﻿namespace Leetcode.Solutions;
 
-class Program
+public class Program
 {
-    static bool HasDuplicates(int[] numArr)
+    public static bool HasDuplicates(int[] numArr)
     {
         HashSet<int> numSet = new();
         foreach (int num in numArr)

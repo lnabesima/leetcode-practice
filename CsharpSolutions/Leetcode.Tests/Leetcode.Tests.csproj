@@ -18,4 +18,8 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Leetcode.Solutions\Leetcode.Solutions.csproj" />
+    </ItemGroup>
+
 </Project>

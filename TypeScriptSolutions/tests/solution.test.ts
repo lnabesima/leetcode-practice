@@ -1,52 +1,59 @@
-import { hasDuplicates } from '../src/solution';
+import { isAnagram } from '../src/solution';
 
-describe('hasDuplicates', () => {
-  it('should return true for an array with duplicate numbers', () => {
-    const myArr = [1, 2, 3, 3];
-    expect(hasDuplicates(myArr)).toBe(true);
+describe('isAnagram', () => {
+  it('should return false if one string is empty', () => {
+    const str1 = '';
+    const str2 = 'banana';
+    expect(isAnagram(str1, str2)).toBe(false);
   });
-
-  it('should return false for an array with unique numbers', () => {
-    const myArr = [1, 2, 3, 4];
-    expect(hasDuplicates(myArr)).toBe(false);
+  it('should return false if one string is null', () => {
+    const str1 = null;
+    const str2 = 'banana';
+    expect(isAnagram(str1, str2)).toBe(false);
   });
-
-  it('should return true for an array with multiple duplicate numbers', () => {
-    const myArr: number[] = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2];
-    expect(hasDuplicates(myArr)).toBe(true);
+  it('should return false if one string have have one letter only', () => {
+    const str1 = 'a';
+    const str2 = 'banana';
+    expect(isAnagram(str1, str2)).toBe(false);
   });
-
-  it('should return false for an empty array', () => {
-    const myArr: number[] = [];
-    expect(hasDuplicates(myArr)).toBe(false);
+  it('should return true if both strings are empty', () => {
+    const str1 = '';
+    const str2 = '';
+    expect(isAnagram(str1, str2)).toBe(true);
   });
-
-  it('should return false for an array with a single element', () => {
-    const myArr = [10];
-    expect(hasDuplicates(myArr)).toBe(false);
+  it('should return false if both strings are null', () => {
+    const str1 = null;
+    const str2 = null;
+    expect(isAnagram(str1, str2)).toBe(false);
   });
-
-  it('should return false for an array with decreasing element order', () => {
-    const myArr: number[] = [5, 4, 3, 2, 1];
-    expect(hasDuplicates(myArr)).toBe(false);
+  it('should return true if both strings contains only one identical letter', () => {
+    const str1 = 'a';
+    const str2 = 'a';
+    expect(isAnagram(str1, str2)).toBe(true);
   });
-
-  it('should return true when the array contains duplicate negative numbers', () => {
-    const myArr: number[] = [-1, -2, -3, -1];
-    expect(hasDuplicates(myArr)).toBe(true);
+  it('should return false if one string contains only one, different letter', () => {
+    const str1 = 'a';
+    const str2 = 'b';
+    expect(isAnagram(str1, str2)).toBe(false);
   });
-
-  it('should return true when the duplicate number is a 0', () => {
-    const myArr: number[] = [0, 1, 2, 0];
-    expect(hasDuplicates(myArr)).toBe(true);
+  it("should return false if there's a mismatch between string's lengths", () => {
+    const str1 = 'banana';
+    const str2 = 'banan';
+    expect(isAnagram(str1, str2)).toBe(false);
   });
-  it('should return true when the duplicate number is in the start of the array', () => {
-    const myArr: number[] = [1, 1, 2, 3, 4];
-    expect(hasDuplicates(myArr)).toBe(true);
+  it('should return false if one string has different letters at the beginning', () => {
+    const str1 = 'banana';
+    const str2 = 'cbnana';
+    expect(isAnagram(str1, str2)).toBe(false);
   });
-
-  it('should return true if the duplicate number is in the end of the array', () => {
-    const myArr: number[] = [1, 2, 3, 4, 4];
-    expect(hasDuplicates(myArr)).toBe(true);
+  it('should return false if one string has different letters at the end', () => {
+    const str1 = 'banana';
+    const str2 = 'banacb';
+    expect(isAnagram(str1, str2)).toBe(false);
+  });
+  it('should return true if both strings have the same length and contains the same letters', () => {
+    const str1 = 'racecar';
+    const str2 = 'carrace';
+    expect(isAnagram(str1, str2)).toBe(true);
   });
 });

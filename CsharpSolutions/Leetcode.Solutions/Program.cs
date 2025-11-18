@@ -9,8 +9,7 @@ public class Program
         // time complexity: O(n)
         // space complexity: O(n)
 
-        // check if both strings have the same character count or are null
-        // if they don't (or are null), they couldn't even be an anagram
+        // if the strings have different character counts, they can't be anagrams
         if (s == null || t == null) return false;
         if (s.Length != t.Length) return false;
 
@@ -22,20 +21,17 @@ public class Program
             charMap[letter] = charMap.GetValueOrDefault(letter) + 1;
         }
 
-        // try to remove every letter in string `t`
-        // if the letter doesn't exist in the map, or it's count's 0, return false
-        // bc it's not an anagram
         foreach (var letter in t)
         {
             if (!charMap.TryGetValue(letter, out int count) || count == 0)
             {
+                // if the current value of letter is 0, then s and t can't be an anagrams
                 return false;
             }
 
             charMap[letter]--;
         }
 
-        // if all letters are removed, then it's an anagram; we should return `true`
         return true;
     }
 

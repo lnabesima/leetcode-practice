@@ -4,42 +4,31 @@ namespace Leetcode.Solutions;
 
 public class Program
 {
-    public static bool IsAnagram(string? s, string? t)
+    public static int[] TwoSum(int[] nums, int target)
     {
-        // time complexity: O(n)
-        // space complexity: O(n)
+        Dictionary<int, int> seenNumbersMap = new();
 
-        // if the strings have different character counts, they can't be anagrams
-        if (s == null || t == null) return false;
-        if (s.Length != t.Length) return false;
-
-
-        // count every letter in string `s`
-        Dictionary<char, int> charMap = new();
-        foreach (var letter in s)
+        for (int i = 0; i < nums.Length; i++)
         {
-            charMap[letter] = charMap.GetValueOrDefault(letter) + 1;
-        }
+            int complement = target - nums[i];
 
-        foreach (var letter in t)
-        {
-            if (!charMap.TryGetValue(letter, out int count) || count == 0)
+            if (seenNumbersMap.TryGetValue(complement, out int complementIndex))
             {
-                // if the current value of letter is 0, then s and t can't be an anagrams
-                return false;
+                return [complementIndex, i];
             }
 
-            charMap[letter]--;
+            seenNumbersMap.Add(nums[i], i);
         }
 
-        return true;
+        throw new Exception("No two sum solution found.");
     }
 
     [ExcludeFromCodeCoverage]
     static void Main(string[] args)
     {
-        var string1 = "racecar";
-        var string2 = "carrace";
-        Console.WriteLine(IsAnagram(string1, string2));
+        int[] arr = [1, 2, 3, 4];
+        const int target = 3;
+
+        Console.WriteLine(TwoSum(arr, target));
     }
 }

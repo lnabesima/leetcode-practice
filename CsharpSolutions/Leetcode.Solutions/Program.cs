@@ -6,7 +6,7 @@ public class Program
 {
     public static int[] TwoSum(int[] nums, int target)
     {
-        Dictionary<int, int> seenNumbersMap = new();
+        Dictionary<int, int> seenNumbersMap = new(nums.Length);
 
         for (int i = 0; i < nums.Length; i++)
         {
@@ -17,17 +17,17 @@ public class Program
                 return [complementIndex, i];
             }
 
-            seenNumbersMap.Add(nums[i], i);
+            seenNumbersMap.TryAdd(nums[i], i);
         }
 
-        throw new Exception("No two sum solution found.");
+        throw new ArgumentException("No two sum solution found.");
     }
 
     [ExcludeFromCodeCoverage]
     static void Main(string[] args)
     {
-        int[] arr = [1, 2, 3, 4];
-        const int target = 3;
+        int[] arr = [1, 1, 3, 4];
+        const int target = 4;
 
         Console.WriteLine(TwoSum(arr, target));
     }

@@ -1,59 +1,40 @@
-import { isAnagram } from '../src/solution';
+import { twoSum } from '../src/solution';
 
-describe('isAnagram', () => {
-  it('should return false if one string is empty', () => {
-    const str1 = '';
-    const str2 = 'banana';
-    expect(isAnagram(str1, str2)).toBe(false);
+describe('twoSum', () => {
+  const ERROR_MESSAGE = 'No two sum solution found.';
+
+  describe('Functional correctness', () => {
+    test.each([
+      ['basic positive numbers', [1, 2, 3, 4], 7, [2, 3]],
+      ['negative numbers', [-1, -2, -3, -4], -3, [0, 1]],
+      ['mixed positives and negatives', [-1, 0, 1, 2], -1, [0, 1]],
+      ['zeros', [0, 0, 0, 0], 0, [0, 1]],
+      ['repeated numbers (valid pair)', [1, 2, 2, 4], 4, [1, 2]],
+      ['unsorted array', [2, 5, 1, 3], 6, [1, 2]],
+      ['large integers', [999999998, 2, 1], 1000000000, [0, 1]],
+    ])('should solve for %s', (_, nums, target, expected) => {
+      expect(twoSum(nums, target)).toEqual(expected);
+    });
   });
-  it('should return false if one string is null', () => {
-    const str1 = null;
-    const str2 = 'banana';
-    expect(isAnagram(str1, str2)).toBe(false);
+
+  describe('Error handling', () => {
+    test.each([
+      ['empty array', []],
+      ['single element', [1]],
+      ['no solution found', [1, 2, 5]],
+      ['repeated numbers (no solution)', [1, 2, 2, 4], 100],
+    ])('should throw error for %s', (_, nums, target = 10) => {
+      expect(() => twoSum(nums, target)).toThrow(ERROR_MESSAGE);
+    });
   });
-  it('should return false if one string have have one letter only', () => {
-    const str1 = 'a';
-    const str2 = 'banana';
-    expect(isAnagram(str1, str2)).toBe(false);
-  });
-  it('should return true if both strings are empty', () => {
-    const str1 = '';
-    const str2 = '';
-    expect(isAnagram(str1, str2)).toBe(true);
-  });
-  it('should return false if both strings are null', () => {
-    const str1 = null;
-    const str2 = null;
-    expect(isAnagram(str1, str2)).toBe(false);
-  });
-  it('should return true if both strings contains only one identical letter', () => {
-    const str1 = 'a';
-    const str2 = 'a';
-    expect(isAnagram(str1, str2)).toBe(true);
-  });
-  it('should return false if one string contains only one, different letter', () => {
-    const str1 = 'a';
-    const str2 = 'b';
-    expect(isAnagram(str1, str2)).toBe(false);
-  });
-  it("should return false if there's a mismatch between string's lengths", () => {
-    const str1 = 'banana';
-    const str2 = 'banan';
-    expect(isAnagram(str1, str2)).toBe(false);
-  });
-  it('should return false if one string has different letters at the beginning', () => {
-    const str1 = 'banana';
-    const str2 = 'cbnana';
-    expect(isAnagram(str1, str2)).toBe(false);
-  });
-  it('should return false if one string has different letters at the end', () => {
-    const str1 = 'banana';
-    const str2 = 'banacb';
-    expect(isAnagram(str1, str2)).toBe(false);
-  });
-  it('should return true if both strings have the same length and contains the same letters', () => {
-    const str1 = 'racecar';
-    const str2 = 'carrace';
-    expect(isAnagram(str1, str2)).toBe(true);
+
+  it('should perform efficiently with a large dataset', () => {
+    // this underscore syntax is the numeric separator
+    // it gets ignored by the javascript engine
+    const size = 1_000_000;
+    const arr = Array.from({ length: size }, (_, i) => i);
+    const target = arr[size - 2]! + arr[size - 1]!;
+
+    expect(twoSum(arr, target)).toEqual([size - 2, size - 1]);
   });
 });

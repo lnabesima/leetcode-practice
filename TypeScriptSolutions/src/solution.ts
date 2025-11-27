@@ -12,9 +12,3 @@ export function twoSum(nums: number[], target: number): number[] {
 
   throw new Error("No two sum solution found.");
 }
-
-const nums = [2, 7, 11, 15];
-const target = 9;
-
-const result = twoSum(nums, target);
-console.log(result);

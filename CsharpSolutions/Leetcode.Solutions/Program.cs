@@ -24,11 +24,5 @@ public class Program
     }
 
     [ExcludeFromCodeCoverage]
-    static void Main(string[] args)
-    {
-        int[] arr = [1, 1, 3, 4];
-        const int target = 4;
-
-        Console.WriteLine(TwoSum(arr, target));
-    }
+    static void Main() { }
 }

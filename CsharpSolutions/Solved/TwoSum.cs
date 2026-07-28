@@ -1,0 +1,28 @@
+using System.Diagnostics.CodeAnalysis;
+
+namespace Leetcode.Solutions;
+
+public class TwoSumProgram
+{
+    public static int[] TwoSum(int[] nums, int target)
+    {
+        Dictionary<int, int> seenNumbersMap = new(nums.Length);
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            int complement = target - nums[i];
+
+            if (seenNumbersMap.TryGetValue(complement, out int complementIndex))
+            {
+                return [complementIndex, i];
+            }
+
+            seenNumbersMap.TryAdd(nums[i], i);
+        }
+
+        throw new ArgumentException("No two sum solution found.");
+    }
+
+    [ExcludeFromCodeCoverage]
+    static void Main() { }
+}

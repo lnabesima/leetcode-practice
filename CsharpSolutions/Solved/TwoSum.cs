@@ -1,8 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Leetcode.Solutions;
 
-public class Program
+public class TwoSumProgram
 {
     public static int[] TwoSum(int[] nums, int target)
     {

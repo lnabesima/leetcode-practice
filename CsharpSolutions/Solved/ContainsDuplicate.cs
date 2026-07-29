@@ -1,6 +1,6 @@
 ﻿namespace Leetcode.Solutions;
 
-public class Program
+public class HasDuplicatesProgram
 {
     public static bool HasDuplicates(int[] numArr)
     {
